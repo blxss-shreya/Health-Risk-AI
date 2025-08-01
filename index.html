@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Health Risk AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #FBFBFB, #E8F9FF);
+      color: #9EC6F3;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 3rem 4rem;
+      box-shadow: 0 10px 40px #A6AEBF;
+      text-align: center;
+      max-width: 500px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #9EC6F3;
+      margin-bottom: 2rem;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .buttons a {
+      text-decoration: none;
+      background: #9EC6F3;
+      color: #F9F3EF;
+      padding: 0.9rem 2.2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 20px #555879;
+    }
+
+    .buttons a:hover {
+      background: #98A1BC;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px #98A1BC;
+    }
+
+ 
+    .circle-shape,
+    .rectangle-shape,
+    .oval-shape {
+      position: absolute;
+      z-index: 0;
+      opacity: 0.2;
+      filter: blur(8px);
+    }
+
+    .circle-shape {
+      top: -80px;
+      right: -80px;
+      width: 200px;
+      height: 200px;
+      background: #4CC9FE;
+      border-radius: 50%;
+    }
+
+    .rectangle-shape {
+      bottom: 60px;
+      left: -100px;
+      width: 300px;
+      height: 120px;
+      background: #4CC9FE;
+      border-radius: 20px;
+      transform: rotate(-12deg);
+    }
+
+
+    .oval-shape {
+      top: 30%;
+      right: -120px;
+      width: 280px;
+      height: 150px;
+      background: #4CC9FE;
+      border-radius: 50%;
+      transform: rotate(25deg);
+    }
+
+ 
+    @media (max-width: 600px) {
+      .card {
+        padding: 2rem;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      .buttons a {
+        width: 100%;
+        text-align: center;
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="circle-shape"></div>
+  <div class="rectangle-shape"></div>
+  <div class="oval-shape"></div>
+
+
+
+  <div class="container">
+    <div class="card">
+      <h1>Welcome to <span style="color:#555879">Health Risk AI</span></h1>
+      <p>Select a prediction model to assess your health risk using AI technology.</p>
+      <div class="buttons">
+        <a href="diabetes.html">Diabetes Prediction</a>
+        <a href="heart.html">Heart Disease Prediction</a>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

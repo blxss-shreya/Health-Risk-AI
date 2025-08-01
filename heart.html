@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Heart Disease Risk Predictor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Background & font */
+    .description {
+      max-width: 500px;
+      line-height: 1.4;
+      text-align: center;
+      font-size: 1rem;
+      color: #9EC6F3;
+      margin-bottom: 2rem;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #FBFBFB, #E8F9FF);
+      color: #555879;
+      margin: 0;
+      padding: 2rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    h2 {
+      margin:0;
+      font-weight: 700;
+      letter-spacing: 1px;
+      /* margin-top:-100px; */
+      margin-bottom:1.5rem;
+      font-size: 2rem;
+
+    }
+
+    /* Form styling */
+    form {
+      width: 100%;
+      height:100%;
+      max-width: 900px;
+      max-height:300px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      /* soft teal box background for clarity */
+      padding: 2.5rem 3rem;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px #A6AEBF;
+      text-align: center;
+    }
+
+    form label {
+      display: block;
+      margin: 0.8rem 0 0.4rem 0;
+      font-weight: 600;
+      text-align: left;
+      color: #333;
+    }
+
+
+    form input[type="number"],
+    form select {
+      width: 100%;
+      max-width: 100%;
+      padding: 0.5rem 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      outline: none;
+      transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    form input[type="number"]:focus,
+    form select:focus {
+      border-color: #b2ebf2;
+      box-shadow: 0 0 6px 3px #b2ebf2;
+    }
+    form {
+      max-height: unset; 
+    }
+
+  
+
+
+    .form-row {
+      display: flex;
+      gap: 2rem;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .form-column {
+      flex: 1;
+      min-width: 250px;
+
+    }
+
+    .form-column label,
+    .form-column input {
+      width: 100%;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+
+
+
+
+
+    /* Submit button */
+    button {
+      margin-top: 1.8rem;
+      background: #9EC6F3;
+      border: none;
+      color: #F9F3EF;
+      padding: 0.9rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #98A1BC;
+    }
+
+    .circle-shape,
+    .rectangle-shape,
+    .oval-shape {
+      position: absolute;
+      z-index: 0;
+      opacity: 0.2;
+      filter: blur(8px);
+    }
+
+    .circle-shape {
+      top: -80px;
+      right: -80px;
+      width: 200px;
+      height: 200px;
+      background: #4CC9FE;
+      border-radius: 50%;
+    }
+
+    .rectangle-shape {
+      bottom: 60px;
+      left: -100px;
+      width: 300px;
+      height: 120px;
+      background: #4CC9FE;
+      border-radius: 20px;
+      transform: rotate(-12deg);
+    }
+
+
+    .oval-shape {
+      top: 30%;
+      right: -120px;
+      width: 280px;
+      height: 150px;
+      background: #4CC9FE;
+      border-radius: 50%;
+      transform: rotate(25deg);
+    }
+
+    /* Result text */
+    #result {
+      margin-top: 1.5rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #007c91;
+      max-width: 450px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="circle-shape"></div>
+  <div class="rectangle-shape"></div>
+  <div class="oval-shape"></div>
+  <!-- <img src="diabetes.png" alt="Diabetes Logo" style="
+    width: 80px; 
+    height: auto; 
+    position: fixed; 
+    top: 20px; 
+    left: 30px;  /* for top-left corner */
+    z-index: 1000;
+  " /> -->
+
+  <!-- <img src="medical-symbol.png" alt="Diabetes Logo" style="
+    width: 80px; 
+    height: auto; 
+    position: fixed; 
+    top: 20px; 
+    right: 30px;  /* for top-left corner */
+    z-index: 1000;
+  " /> -->
+
+  <h2>Heart Disease Risk Predictor</h2>
+  <p class="description">
+    Please enter your health information below to receive a prediction of your likelihood of having heart disease. This
+    prediction is powered by trained AI models for accurate assessment.
+  </p>
+        <form id="predict-form">
+          <div class="form-row">
+            <div class="form-column">
+              <div class="form-group">
+                <label for="Age">Age:</label>
+                <input type="number" id="Age" name="Age" required min="0" />
+              </div>
+              <div class="form-group">
+                <label for="Sex">Sex:</label>
+                <select id="Sex" name="Sex" required>
+                  <option value="M">Male</option>
+                  <option value="F">Female</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="ChestPainType">Chest Pain Type:</label>
+                <select id="ChestPainType" name="ChestPainType" required>
+                  <option value="TA">Typical Angina</option>
+                  <option value="ATA">Atypical Angina</option>
+                  <option value="NAP">Non-Anginal Pain</option>
+                  <option value="ASY">Asymptomatic</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="RestingBP">RestingBP:</label>
+                <input type="number" id="RestingBP" name="RestingBP" required min="0" />
+              </div>
+              <div class="form-group">
+                <label for="Cholesterol">Cholesterol:</label>
+                <input type="number" id="Cholesterol" name="Cholesterol" required min="0" />
+              </div>
+              <div class="form-group">
+                <label for="FastingBS">FastingBS:</label>
+                <input type="number" id="FastingBS" name="FastingBS" required min="0" max="1" />
+              </div>
+            </div>
+
+            <div class="form-column">
+              <div class="form-group">
+                <label for="RestingECG">RestingECG:</label>
+                <select id="RestingECG" name="RestingECG" required>
+                  <option value="Normal">Normal</option>
+                  <option value="ST">ST-T wave abnormality</option>
+                  <option value="LVH">Left Ventricular Hypertrophy</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="MaxHR">MaxHR:</label>
+                <input type="number" id="MaxHR" name="MaxHR" required min="0" />
+              </div>
+              <div class="form-group">
+                <label for="ExerciseAngina">ExerciseAngina:</label>
+                <select id="ExerciseAngina" name="ExerciseAngina" required>
+                  <option value="Y">Yes</option>
+                  <option value="N">No</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="Oldpeak">Oldpeak:</label>
+                <input type="number" id="Oldpeak" name="Oldpeak" step="any" required min="0" />
+              </div>
+              <div class="form-group">
+                <label for="ST_Slope">ST Slope:</label>
+                <select id="ST_Slope" name="ST_Slope" required>
+                  <option value="Up">Up</option>
+                  <option value="Flat">Flat</option>
+                  <option value="Down">Down</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit">Predict</button>
+        </form>
+
+
+  <p id="result"></p>
+
+        <script>
+          document.getElementById('predict-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const form = e.target;
+
+            const data = {
+              Age: Number(form.Age.value),
+              Sex: form.Sex.value,
+              ChestPainType: form.ChestPainType.value,
+              RestingBP: Number(form.RestingBP.value),
+              Cholesterol: Number(form.Cholesterol.value),
+              FastingBS: Number(form.FastingBS.value),
+              RestingECG: form.RestingECG.value,
+              MaxHR: Number(form.MaxHR.value),
+              ExerciseAngina: form.ExerciseAngina.value,
+              Oldpeak: Number(form.Oldpeak.value),
+              ST_Slope: form.ST_Slope.value
+            };
+
+
+            try {
+              const response = await fetch('/predict/heart', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+              });
+
+              const result = await response.json();
+
+              if (result.error) {
+                document.getElementById('result').innerText = 'Error: ' + result.error;
+              } else {
+                document.getElementById('result').innerText =
+                  `Prediction: ${result.prediction === 1 ? 'Heart Disease' : 'No Heart Disease'}, Probability: ${result.probability}%`;
+              }
+              } catch (error) {
+                document.getElementById('result').innerText = 'Error: ' + error.message;
+              }
+
+          });
+        </script>
+
+</body>
+
+</html>

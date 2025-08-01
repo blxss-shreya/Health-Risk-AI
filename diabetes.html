@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Diabetes Risk Predictor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #f1f9ff, #eaf2ff);
+      color: #444;
+      margin: 0;
+      padding: 2rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    h2 {
+      font-size: 2.3rem;
+      font-weight: 700;
+      color: #324e63;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .description {
+      font-size: 1rem;
+      text-align: center;
+      max-width: 600px;
+      color: #7ca5d2;
+      margin-bottom: 2rem;
+    }
+
+    form {
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 850px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 1;
+    }
+
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .form-column {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .form-group {
+      margin-bottom: 1.3rem;
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.6rem 1rem;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    input:focus {
+      border-color: #90d6fb;
+      box-shadow: 0 0 6px 2px rgba(144, 214, 251, 0.4);
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1.1rem;
+      background-color: #90c9f7;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+      margin-top: 1.5rem;
+    }
+
+    button:hover {
+      background-color: #75b3e9;
+    }
+
+    #result {
+      margin-top: 1.5rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      text-align: center;
+      color: #007c91;
+    }
+
+    /* Soft Shapes */
+    .circle-shape,
+    .blob-shape,
+    .triangle-shape {
+      position: absolute;
+      z-index: 0;
+      opacity: 0.15;
+      filter: blur(30px);
+    }
+
+    .circle-shape {
+      top: -60px;
+      left: -80px;
+      width: 180px;
+      height: 180px;
+      background: #86cfff;
+      border-radius: 50%;
+    }
+
+    .blob-shape {
+      bottom: -100px;
+      right: -120px;
+      width: 300px;
+      height: 300px;
+      background: #b9e2fc;
+      border-radius: 40% 60% 70% 30% / 30% 50% 70% 50%;
+    }
+
+    .triangle-shape {
+      top: 50%;
+      left: -60px;
+      width: 140px;
+      height: 140px;
+      background: #cee9ff;
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    }
+
+    .circle-shape,
+    .rectangle-shape,
+    .oval-shape {
+      position: absolute;
+      z-index: 0;
+      opacity: 0.2;
+      filter: blur(8px);
+    }
+
+    .circle-shape {
+      top: -80px;
+      right: -80px;
+      width: 200px;
+      height: 200px;
+      background: #4CC9FE;
+      border-radius: 50%;
+    }
+
+    .rectangle-shape {
+      bottom: 60px;
+      left: -100px;
+      width: 300px;
+      height: 120px;
+      background: #4CC9FE;
+      border-radius: 20px;
+      transform: rotate(-12deg);
+    }
+
+
+    .oval-shape {
+      top: 30%;
+      right: -120px;
+      width: 280px;
+      height: 150px;
+      background: #4CC9FE;
+      border-radius: 50%;
+      transform: rotate(25deg);
+    }
+
+    @media (max-width: 768px) {
+      form {
+        padding: 2rem;
+      }
+    }
+  </style>
+
+ 
+  <div class="circle-shape"></div>
+  <div class="blob-shape"></div>
+  <div class="triangle-shape"></div>
+  <div class="circle-shape"></div>
+  <div class="rectangle-shape"></div>
+  <div class="oval-shape"></div>
+
+  <h2>Diabetes Risk Predictor</h2>
+  <p class="description">
+    Please enter your health information below to receive a prediction of your likelihood of having diabetes. This prediction is powered by trained AI models for accurate assessment.
+  </p>
+
+  <form id="predict-form">
+    <div class="form-row">
+      <div class="form-column">
+        <div class="form-group">
+          <label for="Pregnancies">Pregnancies:</label>
+          <input type="number" id="Pregnancies" name="Pregnancies" required min="0" />
+        </div>
+        <div class="form-group">
+          <label for="Glucose">Glucose:</label>
+          <input type="number" id="Glucose" name="Glucose" required min="0" />
+        </div>
+        <div class="form-group">
+          <label for="BloodPressure">Blood Pressure:</label>
+          <input type="number" id="BloodPressure" name="BloodPressure" required min="0" />
+        </div>
+        <div class="form-group">
+          <label for="SkinThickness">Skin Thickness:</label>
+          <input type="number" id="SkinThickness" name="SkinThickness" required min="0" />
+        </div>
+      </div>
+
+      <div class="form-column">
+        <div class="form-group">
+          <label for="Insulin">Insulin:</label>
+          <input type="number" id="Insulin" name="Insulin" required min="0" />
+        </div>
+        <div class="form-group">
+          <label for="BMI">BMI:</label>
+          <input type="number" id="BMI" name="BMI" required step="any" min="0" />
+        </div>
+        <div class="form-group">
+          <label for="DiabetesPedigreeFunction">Diabetes Pedigree Function:</label>
+          <input type="number" id="DiabetesPedigreeFunction" name="DiabetesPedigreeFunction" required step="any" min="0" />
+        </div>
+        <div class="form-group">
+          <label for="Age">Age:</label>
+          <input type="number" id="Age" name="Age" required min="0" />
+        </div>
+      </div>
+    </div>
+
+    <button type="submit">Predict</button>
+  </form>
+
+  <p id="result"></p>
+
+  <script>
+    document.getElementById('predict-form').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const data = {
+        Pregnancies: Number(form.Pregnancies.value),
+        Glucose: Number(form.Glucose.value),
+        BloodPressure: Number(form.BloodPressure.value),
+        SkinThickness: Number(form.SkinThickness.value),
+        Insulin: Number(form.Insulin.value),
+        BMI: Number(form.BMI.value),
+        DiabetesPedigreeFunction: Number(form.DiabetesPedigreeFunction.value),
+        Age: Number(form.Age.value),
+        BMI_Age_Ratio: Number(form.BMI.value) / Number(form.Age.value),
+        Glucose_BMI: Number(form.Glucose.value) * Number(form.BMI.value),
+        Insulin_Sqrt: Math.sqrt(Number(form.Insulin.value))
+      };
+
+      try {
+        const response = await fetch('/predict/diabetes', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        if (result.error) {
+          document.getElementById('result').innerText = 'Error: ' + result.error;
+        } else {
+          document.getElementById('result').innerText =
+            `Prediction: ${result.prediction === 1 ? 'Diabetes' : 'No Diabetes'}, Probability: ${result.probability.toFixed(2)}%`;
+
+        }
+      } catch (error) {
+        document.getElementById('result').innerText = 'Error: ' + error.message;
+      }
+    });
+  </script>
+</body>
+
+</html>
