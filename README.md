@@ -17,17 +17,33 @@ This project is a simple AI-powered web app that predicts the risk of **diabetes
 - HTML/CSS
 - Pickle (for saving models)
 
-## How to Run
+## Requirements
 
-1. Clone the repo:
-   git clone https://github.com/blxss-shreya/Health-Risk-AI.git
-  cd Health-Risk-AI
-2. Install dependencies:
-   pip install -r requirements.txt
-3. Run the app:
-   python main.py
-4. Open your browser and go to `http://127.0.0.1:3000`
-5. 
-  git clone https://github.com/blxss-shreya/Health-Risk-AI.git
-  cd Health-Risk-AI
+- Python 3.11+
+- pip
 
+## Setup(done in command line)
+
+1. Clone the repository:
+   - git clone https://github.com/blxss-shreya/Health-Risk-AI.git
+   - cd Health-Risk-AI
+
+2. Create and activate a virtual environment:
+   - python3.11 -m venv venv
+   - source venv/bin/activate (on macOS/Linux)  
+     or venv\Scripts\activate (on Windows)
+
+3. Install dependencies:
+   - pip install -r requirements.txt  
+     or manually:  
+     pip install flask Flask-Cors pandas scikit-learn xgboost
+
+4. Run the app:
+   - python main.py
+
+Once running, open http://127.0.0.1:5000 in your browser.
+
+## Notes
+
+- Tested on macOS with Python 3.11 installed via Homebrew.
+- If you don’t have Python 3.11, install it using your package manager (e.g., `brew install python@3.11` on macOS).
