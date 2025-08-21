@@ -47,3 +47,8 @@ Once running, open http://127.0.0.1:5000 in your browser.
 
 - Tested on macOS with Python 3.11 installed via Homebrew.
 - If you don’t have Python 3.11, install it using your package manager (e.g., `brew install python@3.11` on macOS).
+
+- ![Alt text](images/Screenshot 2025-08-21 at 11.51.12 AM.png)
+![Alt text](images/Screenshot 2025-08-21 at 11.51.34 AM.png)
+![Alt text](images/Screenshot 2025-08-21 at 11.52.10 AM.png)
+
